@@ -3,4 +3,4 @@ import controller as c
 
 
 def test_create_event():
-    assert c.create_event() == True
+    assert c.create_event()
