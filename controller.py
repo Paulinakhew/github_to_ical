@@ -1,6 +1,6 @@
 import os
-from datetime import datetime
-from icalendar import Calendar, Event
+from datetime import date
+from icalendar import Calendar, Event, vCalAddress, vText
 
 
 def create_event():
@@ -8,11 +8,22 @@ def create_event():
 
     event = Event()
 
-    event.add('summary', 'summary')
-    event.add('dtstart', datetime.now())
-    event.add('dtend', datetime.now())
-    event.add('description', 'Activity')
-    event.add('location', 'Room')
+    event.add('summary', 'Out of Office')
+    event.add('dtstart', date.today())
+    event.add('dtend', date.today())
+
+    event.add('description', 'I\'ll be out of office today.')
+
+    organizer = vCalAddress('MAILTO:paulinakhew12345@hotmail.com')
+    organizer.params['cn'] = vText('Paulina Khew')
+    organizer.params['role'] = vText('Software Engineering Co-op')
+    event['organizer'] = organizer
+    event['location'] = vText('Out of Office')
+
+    attendee = vCalAddress('MAILTO:paulinakhew12345@hotmail.com')
+    attendee.params['ROLE'] = vText('REQ-PARTICIPANT')
+    event.add('attendee', attendee, encode=0)
+
     cal.add_component(event)
 
     f = open('course_schedule.ics', 'wb')
