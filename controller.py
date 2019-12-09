@@ -1,6 +1,5 @@
 import os
 from datetime import datetime
-from docx import Document
 from icalendar import Calendar, Event
 
 
@@ -9,7 +8,7 @@ def create_event():
 
     event = Event()
 
-    event.add('summary','summary')
+    event.add('summary', 'summary')
     event.add('dtstart', datetime.now())
     event.add('dtend', datetime.now())
     event.add('description', 'Activity')
